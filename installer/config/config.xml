@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>JAK</Name>
+    <Version>1.0.0</Version>
+    <Title>Instalator JAK</Title>
+    <Publisher>MAC300</Publisher>
+    <StartMenuDir>JAK</StartMenuDir>
+    <TargetDir>@HomeDir@/JAK</TargetDir>
+    <AllowSpaceInPath>true</AllowSpaceInPath>
+    <RemoteRepositories>
+        <Repository>
+            <Url>http://mac30.pl/jak/installer/repo/</Url>
+        </Repository>
+    </RemoteRepositories>
+</Installer>
