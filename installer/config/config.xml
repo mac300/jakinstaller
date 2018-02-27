@@ -9,7 +9,7 @@
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <RemoteRepositories>
         <Repository>
-            <Url>http://mac30.pl/jak/installer/repo/</Url>
+            <Url>https://github.com/mac300/jak_win_repo</Url>
         </Repository>
     </RemoteRepositories>
 </Installer>
