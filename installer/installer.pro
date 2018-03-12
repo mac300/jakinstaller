@@ -74,4 +74,8 @@ DISTFILES += \
     packages/mac30.jak.installer/data/readme.txt \
     config/installer_logo.png \
     config/installer_licon.png \
-    config/installer_wicon.ico
+    config/installer_wicon.ico \
+    packages/mac30.jak.installer/meta/installscript.qs
+
+FORMS += \
+    packages/mac30.jak.installer/meta/readmecheckboxform.ui

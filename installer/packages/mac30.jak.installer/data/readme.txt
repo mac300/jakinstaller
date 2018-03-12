@@ -15,8 +15,8 @@
     AKTUALIZACJA I DEINSTALACJA PROGRAMU:
     ----------------------------------------------------------------------------
 
-    Windows:    program - MaintenanceTool.exe
+    Windows:    program - maintenancetool.exe
 
-    Linux:      program - MaintenanceTool
+    Linux:      program - maintenancetool
 
     --------------------------------------------------

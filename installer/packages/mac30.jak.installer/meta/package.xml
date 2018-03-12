@@ -8,4 +8,8 @@
     <Name>mac30.jak.installer</Name>
     <ForcedInstallation>true</ForcedInstallation>
     <RequiresAdminRights>false</RequiresAdminRights>
+    <Script>installscript.qs</Script>
+    <UserInterfaces>
+        <UserInterface>readmecheckboxform.ui</UserInterface>
+    </UserInterfaces>
 </Package>

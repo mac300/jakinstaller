@@ -7,7 +7,7 @@
     <StartMenuDir>Symulator J.A.K</StartMenuDir>
     <TargetDir>@HomeDir@/JAK</TargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
-    <InstallerWindowIcon>installer_licon</InstallerWindowIcon>
+    <InstallerWindowIcon>installer_licon.png</InstallerWindowIcon>
     <InstallerApplicationIcon>installer_wicon</InstallerApplicationIcon>
     <Logo>installer_logo.png</Logo>
     <RemoteRepositories>
