@@ -10,9 +10,15 @@ TARGET = jak
 TEMPLATE = app
 
 #-------------------------------------------------
+# Plik wykonywalny (ubuntu mate)
+#-------------------------------------------------
+#unix {
+#    QMAKE_LFLAGS += -no-pie
+#}
+
+#-------------------------------------------------
 # Wybór katalogu wynikowego
 #-------------------------------------------------
-
 CONFIG(debug, debug|release) {
     DESTDIR = $$OUT_PWD/../../JakDebug
 } else {
@@ -22,7 +28,6 @@ CONFIG(debug, debug|release) {
 #-------------------------------------------------
 # Kopiowanie pliku bazy danych
 #-------------------------------------------------
-
     win32 {
         COPY_FROM_PATH = $$shell_path($$PWD/isotopes)
         COPY_TO_PATH = $$shell_path($$DESTDIR/isotopes)
@@ -40,7 +45,6 @@ CONFIG(debug, debug|release) {
 #-------------------------------------------------
 # Oddzielne katalogi dla typów plików
 #-------------------------------------------------
-
 MOC_DIR = ../common/build/moc
 RCC_DIR = ../common/build/rcc
 UI_DIR = ../common/build/ui
@@ -51,19 +55,25 @@ macx:OBJECTS_DIR = ../common/build/o/mac
 #-------------------------------------------------
 # Uruchomienie win deploy
 #-------------------------------------------------
-
 win32 {
-    CONFIG(debug, debug|release) {
-            QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$OUT_PWD/../../JakDebug
-    } else {
-        QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$OUT_PWD/../../JakRelease
-    }
+    QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$DESTDIR
+}
+
+#-------------------------------------------------
+# Uruchomienie linuxdeployqt (linux)
+#-------------------------------------------------
+unix {
+    QMAKE_POST_LINK = mkdir $$OUT_PWD/../../tmp
+    QMAKE_POST_LINK += && cp -f $$PWD/addons/* $$OUT_PWD/../../tmp
+    QMAKE_POST_LINK += && mv -f $$DESTDIR/$$TARGET $$OUT_PWD/../../tmp
+    QMAKE_POST_LINK += && $$(QTDIR)/bin/linuxdeployqt $$OUT_PWD/../../tmp/$$TARGET -no-translations -no-copy-copyright-files -appimage
+    QMAKE_POST_LINK += && mv -f $$OUT_PWD/*.AppImage $$DESTDIR/$$TARGET
+    QMAKE_POST_LINK += && rm -R $$OUT_PWD/../../tmp
 }
 
 #-------------------------------------------------
 # Pliki projektu
 #-------------------------------------------------
-
 SOURCES += main.cpp\
     mainwindow.cpp \
     mainwidget.cpp \
@@ -93,4 +103,6 @@ DISTFILES += \
     images/folder.png \
     images/left.png \
     images/logo.png \
-    images/right.png
+    images/right.png \
+    addons/jak.desktop \
+    addons/jak_logo.png

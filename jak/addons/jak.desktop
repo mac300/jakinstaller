@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Jak
+Comment=Symulation
+Exec=jak %F
+Type=Application
+Icon=jak_logo
+Categories=Education;
