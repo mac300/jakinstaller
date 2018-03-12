@@ -6,40 +6,32 @@ TEMPLATE = aux
 # $$PWD/installer/packages/com.github.jakinstaller/data
 # i w zależności od trybu budowania wybrać katalogi dla instalatorów
 #-------------------------------------------------
-
 CONFIG(debug, debug|release) {
     INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerDebug/Jak.offline
     INSTALLER_ONLINE = $$OUT_PWD/../../InstallerDebug/Jak.online
-    DESTDIR_WIN = $$PWD/packages/mac30.jak.installer/data
-    DESTDIR_WIN ~= s,/,\\,g
     PWD_WIN = $$OUT_PWD/../../JakDebug
-    PWD_WIN ~= s,/,\\,g
-
-    copydata.commands = $(COPY_DIR) $$PWD_WIN $$DESTDIR_WIN
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
 } else {
     INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerRelease/Jak.offline
     INSTALLER_ONLINE = $$OUT_PWD/../../InstallerRelease/Jak.online
-    PACKAGES_ONLINE = $$OUT_PWD/../../repository
-    DESTDIR_WIN = $$PWD/packages/mac30.jak.installer/data
-    DESTDIR_WIN ~= s,/,\\,g
     PWD_WIN = $$OUT_PWD/../../JakRelease
-    PWD_WIN ~= s,/,\\,g
-
-    copydata.commands = $(COPY_DIR) $$PWD_WIN $$DESTDIR_WIN
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
+    PACKAGES_ONLINE = $$OUT_PWD/../../repository
 }
+DESTDIR_WIN = $$PWD/packages/mac30.jak.installer/data
+win32 {
+    DESTDIR_WIN ~= s,/,\\,g
+    PWD_WIN ~= s,/,\\,g
+    copydata.commands = $(COPY_DIR) $$PWD_WIN $$DESTDIR_WIN
+} else {
+    copydata.commands = cp -f -r $$PWD_WIN/* $$DESTDIR_WIN
+}
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
 
 #-------------------------------------------------
 # tworzenie instalatora offline
 #-------------------------------------------------
-
 INPUT = $$PWD/config/config.xml $$PWD/packages
 offlineInstaller.depends = copydata
 offlineInstaller.input = INPUT
@@ -51,7 +43,6 @@ QMAKE_EXTRA_COMPILERS += offlineInstaller
 #-------------------------------------------------
 # tworzenie instalatora online
 #-------------------------------------------------
-
 INPUT = $$PWD/config/config.xml $$PWD/packages
 onlineInstaller.depends = copydata
 onlineInstaller.input = INPUT
@@ -62,9 +53,8 @@ QMAKE_EXTRA_COMPILERS += onlineInstaller
 
 #-------------------------------------------------
 # po utworzeniu instalatorów
-# tworzenie repozytoriów - w trybie release
+# tworzenie repozytoriów - tylko w trybie release
 #-------------------------------------------------
-
 CONFIG(release, debug|release) {
     INPUT = $$PWD/packages
     onlinePackages.depends = copydata
@@ -75,6 +65,13 @@ CONFIG(release, debug|release) {
     QMAKE_EXTRA_COMPILERS += onlinePackages
 }
 
+#-------------------------------------------------
+# pliki konfiguracyjne instalatora
+#-------------------------------------------------
 DISTFILES += \
     config/config.xml \
-    packages/mac30.jak.installer/meta/package.xml
+    packages/mac30.jak.installer/meta/package.xml \
+    packages/mac30.jak.installer/data/readme.txt \
+    config/installer_logo.png \
+    config/installer_licon.png \
+    config/installer_wicon.ico

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>JAK</Name>
+    <Name>J.A.K</Name>
     <Version>1.0.0</Version>
-    <Title>Instalator JAK</Title>
-    <Publisher>MAC300</Publisher>
-    <StartMenuDir>JAK</StartMenuDir>
+    <Title>Instalator aplikacji J.A.K</Title>
+    <Publisher>mac300</Publisher>
+    <StartMenuDir>Symulator J.A.K</StartMenuDir>
     <TargetDir>@HomeDir@/JAK</TargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
+    <InstallerWindowIcon>installer_licon</InstallerWindowIcon>
+    <InstallerApplicationIcon>installer_wicon</InstallerApplicationIcon>
+    <Logo>installer_logo.png</Logo>
     <RemoteRepositories>
         <Repository>
             <Url>https://github.com/mac300/jak_win_repo</Url>
+            <DisplayName>Repozytorium aplikacji J.A.K</DisplayName>
         </Repository>
     </RemoteRepositories>
 </Installer>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
-    <DisplayName>JAK</DisplayName>
-    <Description>The main component</Description>
+    <DisplayName>Aplikacja J.A.K</DisplayName>
+    <Description>Aplikacja J.A.K</Description>
     <Version>1.0.0</Version>
     <ReleaseDate>2018-02-20</ReleaseDate>
     <Default>true</Default>
     <Name>mac30.jak.installer</Name>
     <ForcedInstallation>true</ForcedInstallation>
-    <RequiresAdminRights>true</RequiresAdminRights>
+    <RequiresAdminRights>false</RequiresAdminRights>
 </Package>
