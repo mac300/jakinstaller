@@ -1,11 +1,11 @@
 
 TEMPLATE = aux
 
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 # zanim zbudujemy projekt musimy umieścić pliki wykonywalne i biblioteki dll w katalogu:
 # $$PWD/installer/packages/com.github.jakinstaller/data
 # i w zależności od trybu budowania wybrać katalogi dla instalatorów
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 CONFIG(debug, debug|release) {
     INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerDebug/Jak.offline
     INSTALLER_ONLINE = $$OUT_PWD/../../InstallerDebug/Jak.online
@@ -29,9 +29,9 @@ export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 # tworzenie instalatora offline
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 INPUT = $$PWD/config/config.xml $$PWD/packages
 offlineInstaller.depends = copydata
 offlineInstaller.input = INPUT
@@ -40,9 +40,9 @@ offlineInstaller.commands = $$(QTDIR)/../../Tools/QtInstallerFramework/3.0/bin/b
 offlineInstaller.CONFIG += target_predeps no_link combine
 QMAKE_EXTRA_COMPILERS += offlineInstaller
 
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 # tworzenie instalatora online
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 INPUT = $$PWD/config/config.xml $$PWD/packages
 onlineInstaller.depends = copydata
 onlineInstaller.input = INPUT
@@ -51,10 +51,10 @@ onlineInstaller.commands = $$(QTDIR)/../../Tools/QtInstallerFramework/3.0/bin/bi
 onlineInstaller.CONFIG += target_predeps no_link combine
 QMAKE_EXTRA_COMPILERS += onlineInstaller
 
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 # po utworzeniu instalatorów
 # tworzenie repozytoriów - tylko w trybie release
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 CONFIG(release, debug|release) {
     INPUT = $$PWD/packages
     onlinePackages.depends = copydata
@@ -65,9 +65,9 @@ CONFIG(release, debug|release) {
     QMAKE_EXTRA_COMPILERS += onlinePackages
 }
 
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 # pliki konfiguracyjne instalatora
-#-------------------------------------------------
+#----------------------------------------------------------------------------------------
 DISTFILES += \
     config/config.xml \
     packages/mac30.jak.installer/meta/package.xml \
