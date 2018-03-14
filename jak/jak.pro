@@ -104,5 +104,7 @@ DISTFILES += \
     images/left.png \
     images/logo.png \
     images/right.png \
+    images/export.png \
+    images/exit.png \
     addons/jak.desktop \
     addons/jak_logo.png

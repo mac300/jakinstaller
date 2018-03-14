@@ -54,14 +54,14 @@ void MainWindow::createMenu()
 
 void MainWindow::createActions()
 {
-    QAction* action=new QAction(tr("Export to &file"),this);
+    QAction* action=new QAction(QIcon(tr(":/icons/export.png")),tr("Export to &file"),this);
     action->setStatusTip(tr("Export actual graph to png file"));
     connect(action,SIGNAL(triggered()),this->mainWidget,SLOT(exportGraphToPng()));
     this->fileMenu->addAction(action);
 
     this->fileMenu->addSeparator();
 
-    action=new QAction(tr("&Exit"),this);
+    action=new QAction(QIcon(tr(":/icons/exit.png")),tr("&Exit"),this);
     action->setStatusTip(tr("Close program imidietly"));
     connect(action,SIGNAL(triggered()),this,SLOT(close()));
     this->fileMenu->addAction(action);

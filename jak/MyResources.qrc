@@ -4,5 +4,7 @@
         <file alias="folder.png">images/folder.png</file>
         <file alias="left.png">images/left.png</file>
         <file alias="right.png">images/right.png</file>
+        <file alias="export.png">images/export.png</file>
+        <file alias="exit.png">images/exit.png</file>
     </qresource>
 </RCC>
