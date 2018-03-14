@@ -28,19 +28,18 @@ CONFIG(debug, debug|release) {
 #-------------------------------------------------
 # Kopiowanie pliku bazy danych
 #-------------------------------------------------
-    win32 {
-        COPY_FROM_PATH = $$shell_path($$PWD/isotopes)
-        COPY_TO_PATH = $$shell_path($$DESTDIR/isotopes)
-    }
-    else {
-        COPY_FROM_PATH = $$PWD/isotopes
-        COPY_TO_PATH = $$DESTDIR/isotopes
-    }
-    copydata.commands = $(COPY_DIR) $$COPY_FROM_PATH $$COPY_TO_PATH
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
+win32 {
+    COPY_FROM_PATH = $$shell_path($$PWD/isotopes)
+    COPY_TO_PATH = $$shell_path($$DESTDIR/isotopes)
+} else {
+    COPY_FROM_PATH = $$PWD/isotopes
+    COPY_TO_PATH = $$DESTDIR/isotopes
+}
+copydata.commands = $(COPY_DIR) $$COPY_FROM_PATH $$COPY_TO_PATH
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
 
 #-------------------------------------------------
 # Oddzielne katalogi dla typów plików
@@ -62,6 +61,7 @@ CONFIG(release, debug|release) {
     #-------------------------------------------------
     win32 {
         QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$DESTDIR
+        QMAKE_POST_LINK += && $(COPY) $$shell_path($$PWD/text/readme.txt) $$shell_path($$PWD/../installer/packages/mac30.jak.installer/data)
     }
 
     #-------------------------------------------------
@@ -73,6 +73,7 @@ CONFIG(release, debug|release) {
         QMAKE_POST_LINK += && mv -f $$DESTDIR/$$TARGET $$OUT_PWD/../../tmp
         QMAKE_POST_LINK += && $$(QTDIR)/bin/linuxdeployqt $$OUT_PWD/../../tmp/$$TARGET -no-translations -no-copy-copyright-files -appimage
         QMAKE_POST_LINK += && mv -f $$OUT_PWD/*.AppImage $$DESTDIR/$$TARGET
+        QMAKE_POST_LINK += && cp -f $$PWD/text/readme.txt $$PWD/../installer/packages/mac30.jak.installer/data
         QMAKE_POST_LINK += && rm -R $$OUT_PWD/../../tmp
     }
 }
@@ -89,7 +90,8 @@ SOURCES += main.cpp\
     isotopesgraphview.cpp \
     isotopediagramitem.cpp \
     isotopewidget.cpp \
-    selectedisotopelabel.cpp
+    selectedisotopelabel.cpp \
+    infodialog.cpp
 
 HEADERS  += mainwindow.h \
     mainwidget.h \
@@ -99,13 +101,15 @@ HEADERS  += mainwindow.h \
     isotopesgraphview.h \
     isotopediagramitem.h \
     isotopewidget.h \
-    selectedisotopelabel.h
+    selectedisotopelabel.h \
+    infodialog.h
 
 RESOURCES += \
     MyResources.qrc
 
 DISTFILES += \
     isotopes/isotopes.db \
+    text/readme.txt \
     images/folder.png \
     images/left.png \
     images/logo.png \
@@ -115,3 +119,6 @@ DISTFILES += \
     images/info.png \
     addons/jak.desktop \
     addons/jak_logo.png
+
+FORMS += \
+    infodialog.ui

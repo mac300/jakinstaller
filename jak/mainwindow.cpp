@@ -207,8 +207,10 @@ QList<QAction*> MainWindow::getIsotopeActions() const
 }
 
 void MainWindow::showInfo()
-{
-
+{    
+    InfoDialog info(tr("J.A.K - info"),tr(":/text/readme.txt"),tr(":/icons/logo.png"),this->windowIcon());
+    info.setModal(true);
+    info.exec();
 }
 
 

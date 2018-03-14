@@ -3,6 +3,7 @@
 
 #include "mainwidget.h"
 #include "isotopeaction.h"
+#include "infodialog.h"
 #include <QMainWindow>
 #include <QMenu>
 #include <QAction>

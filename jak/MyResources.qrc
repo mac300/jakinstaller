@@ -8,4 +8,7 @@
         <file alias="exit.png">images/exit.png</file>
         <file alias="info.png">images/info.png</file>
     </qresource>
+    <qresource prefix="/text">
+        <file alias="readme.txt">text/readme.txt</file>
+    </qresource>
 </RCC>
