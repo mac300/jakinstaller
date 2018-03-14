@@ -12,7 +12,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setWindowTitle("JAK");
+    this->setWindowTitle("J.A.K");
     this->setWindowIcon(QIcon(":/icons/logo.png"));
     this->setMinSize();
 
@@ -48,12 +48,14 @@ void MainWindow::setMinSize()
 void MainWindow::createMenu()
 {
     this->fileMenu=this->menuBar()->addMenu(tr("&File"));
-    this->isotopesMenu=this->menuBar()->addMenu(tr("&Isotopes"));
+    this->isotopesMenu=this->menuBar()->addMenu(tr("Iso&topes"));
     this->infoMenu=this->menuBar()->addMenu(tr("&Info"));
 }
 
 void MainWindow::createActions()
 {
+    //File menu:
+
     QAction* action=new QAction(QIcon(tr(":/icons/export.png")),tr("Export to &file"),this);
     action->setStatusTip(tr("Export actual graph to png file"));
     connect(action,SIGNAL(triggered()),this->mainWidget,SLOT(exportGraphToPng()));
@@ -65,6 +67,8 @@ void MainWindow::createActions()
     action->setStatusTip(tr("Close program imidietly"));
     connect(action,SIGNAL(triggered()),this,SLOT(close()));
     this->fileMenu->addAction(action);
+
+    //Isotopes menu:
 
     IsotopeAction* isotopeAction=new IsotopeAction(IsotopeAction::MASS_EXCESS,tr("&Mass Excess"),this);
     isotopeAction->setStatusTip(tr("Show mass excess data"));
@@ -156,6 +160,14 @@ void MainWindow::createActions()
     isotopeAction->setStatusTip(tr("Show n\u03b1 Q-value energy data"));
     connect(isotopeAction,SIGNAL(actionSelected(int)),mainWidget,SLOT(updateIsotopes(int)));
     this->isotopesMenu->addAction(isotopeAction);
+
+    //Info menu:
+
+    action=new QAction(QIcon(tr(":/icons/info.png")),tr("&Jak - information"),this);
+    action->setStatusTip(tr("Informations about aplication J.a.k"));
+    connect(action,SIGNAL(triggered()),this,SLOT(showInfo()));
+    this->infoMenu->addAction(action);
+
 }
 
 void MainWindow::setConnectionToDatabase()
@@ -178,7 +190,7 @@ void MainWindow::setConnectionToDatabase()
                 {
                     this->dataModel->fetchMore();
                 }
-                QMessageBox::information(this,tr("Information!"),tr("Isotopes data loaded."));
+                //QMessageBox::information(this,tr("Information!"),tr("Isotopes data loaded."));
             }
             this->dataBase.close();
         }
@@ -192,6 +204,11 @@ void MainWindow::setConnectionToDatabase()
 QList<QAction*> MainWindow::getIsotopeActions() const
 {
     return this->isotopesMenu->actions();
+}
+
+void MainWindow::showInfo()
+{
+
 }
 
 

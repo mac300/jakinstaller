@@ -53,22 +53,28 @@ win32:OBJECTS_DIR = ../common/build/o/win32
 macx:OBJECTS_DIR = ../common/build/o/mac
 
 #-------------------------------------------------
-# Uruchomienie win deploy
+# Tylko w przypadku trybu RELEASE!
 #-------------------------------------------------
-win32 {
-    QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$DESTDIR
-}
+CONFIG(release, debug|release) {
 
-#-------------------------------------------------
-# Uruchomienie linuxdeployqt (linux)
-#-------------------------------------------------
-unix {
-    QMAKE_POST_LINK = mkdir $$OUT_PWD/../../tmp
-    QMAKE_POST_LINK += && cp -f $$PWD/addons/* $$OUT_PWD/../../tmp
-    QMAKE_POST_LINK += && mv -f $$DESTDIR/$$TARGET $$OUT_PWD/../../tmp
-    QMAKE_POST_LINK += && $$(QTDIR)/bin/linuxdeployqt $$OUT_PWD/../../tmp/$$TARGET -no-translations -no-copy-copyright-files -appimage
-    QMAKE_POST_LINK += && mv -f $$OUT_PWD/*.AppImage $$DESTDIR/$$TARGET
-    QMAKE_POST_LINK += && rm -R $$OUT_PWD/../../tmp
+    #-------------------------------------------------
+    # Uruchomienie win deploy
+    #-------------------------------------------------
+    win32 {
+        QMAKE_POST_LINK = $$(QTDIR)/bin/windeployqt $$DESTDIR
+    }
+
+    #-------------------------------------------------
+    # Uruchomienie linuxdeployqt (linux)
+    #-------------------------------------------------
+    unix {
+        QMAKE_POST_LINK = mkdir $$OUT_PWD/../../tmp
+        QMAKE_POST_LINK += && cp -f $$PWD/addons/* $$OUT_PWD/../../tmp
+        QMAKE_POST_LINK += && mv -f $$DESTDIR/$$TARGET $$OUT_PWD/../../tmp
+        QMAKE_POST_LINK += && $$(QTDIR)/bin/linuxdeployqt $$OUT_PWD/../../tmp/$$TARGET -no-translations -no-copy-copyright-files -appimage
+        QMAKE_POST_LINK += && mv -f $$OUT_PWD/*.AppImage $$DESTDIR/$$TARGET
+        QMAKE_POST_LINK += && rm -R $$OUT_PWD/../../tmp
+    }
 }
 
 #-------------------------------------------------
@@ -106,5 +112,6 @@ DISTFILES += \
     images/right.png \
     images/export.png \
     images/exit.png \
+    images/info.png \
     addons/jak.desktop \
     addons/jak_logo.png

@@ -25,6 +25,8 @@ public:
     QSqlQueryModel* getDataModel();
     QList<QAction*> getIsotopeActions() const;
 
+private slots:
+    void showInfo();
 
 private:
     void setConnectionToDatabase();

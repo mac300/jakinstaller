@@ -6,5 +6,6 @@
         <file alias="right.png">images/right.png</file>
         <file alias="export.png">images/export.png</file>
         <file alias="exit.png">images/exit.png</file>
+        <file alias="info.png">images/info.png</file>
     </qresource>
 </RCC>
