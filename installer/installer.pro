@@ -9,16 +9,19 @@ CONFIG(release, debug|release) {
     # $$PWD/installer/packages/com.github.jakinstaller/data
     # i wybrać katalogi dla instalatorów
     #----------------------------------------------------------------------------------------
-    INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerRelease/Jak.offline
-    INSTALLER_ONLINE = $$OUT_PWD/../../InstallerRelease/Jak.online
-    PWD_WIN = $$OUT_PWD/../../JakRelease
-    PACKAGES_ONLINE = $$OUT_PWD/../../repository
+    PWD_WIN = $$OUT_PWD/../../JakRelease    
     DESTDIR_WIN = $$PWD/packages/mac30.jak.installer/data
     win32 {
+        INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerRelease/Jak.Windows.offline
+        INSTALLER_ONLINE = $$OUT_PWD/../../InstallerRelease/Jak.Windows.online
+        PACKAGES_ONLINE = $$OUT_PWD/../../repository_windows
         DESTDIR_WIN ~= s,/,\\,g
         PWD_WIN ~= s,/,\\,g
         copydata.commands = $(COPY_DIR) $$PWD_WIN $$DESTDIR_WIN
     } else {
+        INSTALLER_OFFLINE = $$OUT_PWD/../../InstallerRelease/Jak.Linux.offline
+        INSTALLER_ONLINE = $$OUT_PWD/../../InstallerRelease/Jak.Linux.online
+        PACKAGES_ONLINE = $$OUT_PWD/../../repository_linux
         copydata.commands = cp -f -r $$PWD_WIN/* $$DESTDIR_WIN
     }
     first.depends = $(first) copydata
