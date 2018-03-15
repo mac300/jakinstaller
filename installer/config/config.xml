@@ -2,7 +2,7 @@
 <Installer>
     <Name>J.A.K</Name>
     <Version>1.0.0</Version>
-    <Title>Instalator aplikacji J.A.K</Title>
+    <Title>aplikacji J.A.K</Title>
     <Publisher>mac300</Publisher>
     <StartMenuDir>Symulator J.A.K</StartMenuDir>
     <TargetDir>@HomeDir@/JAK</TargetDir>
