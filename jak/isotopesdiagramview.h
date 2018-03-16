@@ -15,6 +15,7 @@
 #include <QPainter>
 #include <QPolygonF>
 #include <QPainterPath>
+#include <QTransform>
 #include <QVector>
 
 class IsotopesDiagramView : public IsotopesView

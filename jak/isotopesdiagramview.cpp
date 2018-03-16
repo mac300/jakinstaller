@@ -19,11 +19,14 @@ void IsotopesDiagramView::wheelEvent(QWheelEvent* event)
     double numSteps=numDegrees/150.0;
     double factor=std::pow(1.05,numSteps);
     QList<QGraphicsItem*> selectedItems=this->scene()->selectedItems();
-    IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
-    if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+    if(!selectedItems.isEmpty())
     {
-        this->centerOn(item);
-        factor=factor>1?1:factor;
+        IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
+        if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+        {
+            this->centerOn(item);
+            factor=factor>1?1:factor;
+        }
     }
     if(this->mapToScene(this->rect()).boundingRect().contains(this->sceneRect()))
     {
@@ -35,10 +38,13 @@ void IsotopesDiagramView::wheelEvent(QWheelEvent* event)
 void IsotopesDiagramView::resizeEvent(QResizeEvent* event)
 {    
     QList<QGraphicsItem*> selectedItems=this->scene()->selectedItems();
-    IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
-    if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+    if(!selectedItems.isEmpty())
     {
-        this->centerOn(item);
+        IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
+        if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+        {
+            this->centerOn(item);
+        }
     }
     this->setResizeAnchor(QGraphicsView::AnchorViewCenter);
     if(this->mapToScene(this->rect()).boundingRect().contains(this->sceneRect()))
@@ -177,7 +183,14 @@ void IsotopesDiagramView::mousePressEvent(QMouseEvent* event)
         }
         else
         {
-            QGraphicsView::mousePressEvent(event);
+            if(this->scene()->itemAt(this->mapToScene(event->pos()),QTransform()))
+            {
+                QGraphicsView::mousePressEvent(event);
+            }
+            else
+            {
+                event->setAccepted(false);
+            }
         }
     }
     else
@@ -190,7 +203,15 @@ void IsotopesDiagramView::mouseReleaseEvent(QMouseEvent* event)
 {
     if(!event->modifiers().testFlag(Qt::ControlModifier))
     {
-        QGraphicsView::mouseReleaseEvent(event);
+
+        if(this->scene()->itemAt(this->mapToScene(event->pos()),QTransform()))
+        {
+            QGraphicsView::mouseReleaseEvent(event);
+        }
+        else
+        {
+            event->setAccepted(false);
+        }
     }
     else
     {
@@ -227,7 +248,7 @@ void IsotopesDiagramView::sceneSelectionChanged()
         }
         this->startIsotope = item->getIndex();
         emit this->isotopeSelectionChanged(this->startIsotope);
-    }
+    }    
 }
 
 void IsotopesDiagramView::changeIsotopeSelection(int row)

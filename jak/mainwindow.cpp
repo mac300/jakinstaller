@@ -38,11 +38,18 @@ QSqlQueryModel* MainWindow::getDataModel()
 void MainWindow::setMinSize()
 {
     QSize size=QDesktopWidget().size();
-    this->move(size.width()/8,size.height()/8);
-    size.setHeight(3*size.height()/4);
-    size.setWidth(3*size.width()/4);
-    this->setMinimumSize(size);
+    int posX = 0;
+    int posY = 0;
+    if (size.width()>1280)
+    {
+        posX = size.width()/8;
+        posY = size.height()/8;
+        size.setHeight(3*size.height()/4);
+        size.setWidth(3*size.width()/4);
 
+    }
+    this->setGeometry(posX,posY,size.width(),size.height());
+    this->setMinimumSize(size);
 }
 
 void MainWindow::createMenu()
