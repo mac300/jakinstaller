@@ -28,7 +28,6 @@ public:
     QString getValue() const;
     void setValue(const QString);
     static void setIsotopeDiagramItem(const double,const double,const QString);
-    static QPointF shift(QPointF);
 
 private:
     void generateColor();

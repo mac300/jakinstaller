@@ -18,6 +18,13 @@ void IsotopesDiagramView::wheelEvent(QWheelEvent* event)
     double numDegrees=event->delta();
     double numSteps=numDegrees/150.0;
     double factor=std::pow(1.05,numSteps);
+    QList<QGraphicsItem*> selectedItems=this->scene()->selectedItems();
+    IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
+    if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+    {
+        this->centerOn(item);
+        factor=factor>1?1:factor;
+    }
     if(this->mapToScene(this->rect()).boundingRect().contains(this->sceneRect()))
     {
         factor=factor<1?1:factor;
@@ -27,18 +34,16 @@ void IsotopesDiagramView::wheelEvent(QWheelEvent* event)
 
 void IsotopesDiagramView::resizeEvent(QResizeEvent* event)
 {    
+    QList<QGraphicsItem*> selectedItems=this->scene()->selectedItems();
+    IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
+    if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
+    {
+        this->centerOn(item);
+    }
     this->setResizeAnchor(QGraphicsView::AnchorViewCenter);
     if(this->mapToScene(this->rect()).boundingRect().contains(this->sceneRect()))
     {
         this->fitInView(this->sceneRect(),Qt::KeepAspectRatio);
-    }
-    else
-    {
-        double factor=1.0*event->size().width()/event->oldSize().width();
-        if(factor>0)
-        {
-            this->scale(factor,factor);
-        }
     }
     QGraphicsView::resizeEvent(event);
 }
@@ -216,7 +221,7 @@ void IsotopesDiagramView::sceneSelectionChanged()
     if(!selectedItems.isEmpty())
     {
         IsotopeDiagramItem* item=dynamic_cast<IsotopeDiagramItem*>(selectedItems.at(0));
-        if(!this->rect().contains(this->mapFromScene(IsotopeDiagramItem::shift(item->pos()))))
+        if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
         {
             this->centerOn(item);
         }
@@ -231,7 +236,7 @@ void IsotopesDiagramView::changeIsotopeSelection(int row)
     {
         this->scene()->clearSelection();
         QGraphicsItem* item=this->scene()->items(Qt::AscendingOrder).at(row);
-        if(!this->rect().contains(this->mapFromScene(IsotopeDiagramItem::shift(item->pos()))))
+        if(!this->rect().contains(this->mapFromScene(item->sceneBoundingRect()).boundingRect()))
         {
             this->centerOn(item);
         }

@@ -56,13 +56,6 @@ void IsotopeDiagramItem::setIsotopeDiagramItem(const double min, const double ma
     IsotopeDiagramItem::valueLabel=label+":";
 }
 
-QPointF IsotopeDiagramItem::shift(QPointF point)
-{
-    point.setX(point.x()+25);
-    point.setY(point.y()+25);
-    return point;
-}
-
 void IsotopeDiagramItem::generateColor()
 {
     if(this->value=="")

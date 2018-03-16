@@ -194,7 +194,7 @@ void IsotopesGraphView::generateSelected()
 void IsotopesGraphView::resizeEvent(QResizeEvent* event)
 {
 
-    this->fitInView(this->scene()->itemsBoundingRect(),Qt::KeepAspectRatio);
+    this->fitInView(this->scene()->itemsBoundingRect(),Qt::IgnoreAspectRatio);
     QGraphicsView::resizeEvent(event);
 }
 

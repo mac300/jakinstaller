@@ -83,8 +83,12 @@ MainWidget::MainWidget(int start,QSqlQueryModel* model,QWidget* parent) :
     mainLayout->addWidget(isotopesTableGroup,0,2,1,1);
     mainLayout->addWidget(isotopesGraphGroup,1,1,1,2);
     mainLayout->setColumnStretch(0,1);
-    mainLayout->setColumnStretch(1,1);
+    mainLayout->setColumnMinimumWidth(1,500);
+    mainLayout->setColumnStretch(1,0);
+    mainLayout->setColumnMinimumWidth(2,380);
     mainLayout->setColumnStretch(2,1);
+    mainLayout->setRowStretch(0,0);
+    mainLayout->setRowStretch(1,2);
 
     connect(this->diagramView,SIGNAL(isotopeSelectionChanged(int)),this->isotopeWidget,SLOT(updateInfo(int)));
     connect(this->diagramView,SIGNAL(isotopeSelectionChanged(int)),this->dataView,SLOT(selectRow(int)));
