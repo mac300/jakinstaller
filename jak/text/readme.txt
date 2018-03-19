@@ -1,5 +1,5 @@
 
-J.A.K (wersja beta)
+J.A.K (wersja alfa)
 -----------------------------------------------------------------------------------------------------------------------------
 symulacja procesów jądrowych
 z zastosowaniem automatów komórkowych
@@ -9,16 +9,16 @@ z zastosowaniem automatów komórkowych
 
 AKTUALIZACJA I DEINSTALACJA PROGRAMU:
 -----------------------------------------------------------------------------------------------------------------------------
-Windows:    uruchom - maintenancetool.exe
-Linux:      uruchom - maintenancetool
+Windows:    uruchom -> maintenancetool.exe
+Linux:      uruchom -> maintenancetool
 
 
 
 
 URUCHAMIANIE:
 -----------------------------------------------------------------------------------------------------------------------------
-Windows:    uruchom - jak.exe
-Linux:      uruchom - jak
+Windows:    uruchom -> jak.exe
+Linux:      uruchom -> jak
 
 
 
