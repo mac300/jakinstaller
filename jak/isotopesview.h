@@ -36,7 +36,7 @@ public:
         ISON=2
     };
 
-    explicit IsotopesView(int,QSqlQueryModel*,int,int,QWidget* =0,GroupByKind=ISOTOPES,GroupByColumnId=ISOT);
+    explicit IsotopesView(int,QSqlQueryModel*,int,int,QWidget* =nullptr,GroupByKind=ISOTOPES,GroupByColumnId=ISOT);
     virtual void updateIsotopes(int =6) =0;
     int heightForWidth(int) const;
     QSize minimumSizeHint() const;

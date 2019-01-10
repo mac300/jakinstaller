@@ -17,7 +17,7 @@ class InfoDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit InfoDialog(QString, QString, QString , QIcon, QWidget *parent = 0);
+    explicit InfoDialog(QString, QString, QString , QIcon, QWidget *parent = nullptr);
     ~InfoDialog();
 
 private:

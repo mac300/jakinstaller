@@ -20,7 +20,7 @@ class IsotopeWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit IsotopeWidget(int,QSqlQueryModel*,QWidget *parent = 0);
+    explicit IsotopeWidget(int,QSqlQueryModel*,QWidget *parent = nullptr);
 
 signals:
     void isotopeChanged(int);

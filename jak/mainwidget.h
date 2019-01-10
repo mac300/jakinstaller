@@ -23,7 +23,7 @@ class MainWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MainWidget(int,QSqlQueryModel*,QWidget* = 0);
+    explicit MainWidget(int,QSqlQueryModel*,QWidget* = nullptr);
 
 signals:
     void tableRowChanged(int);

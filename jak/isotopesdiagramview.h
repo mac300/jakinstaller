@@ -23,7 +23,7 @@ class IsotopesDiagramView : public IsotopesView
     Q_OBJECT
 
 public:
-    explicit IsotopesDiagramView(int,QSqlQueryModel*,int,int,QWidget* = 0);
+    explicit IsotopesDiagramView(int,QSqlQueryModel*,int,int,QWidget* = nullptr);
     void updateIsotopes(int =6);
 
 signals:

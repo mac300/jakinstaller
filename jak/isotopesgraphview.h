@@ -17,7 +17,7 @@ class IsotopesGraphView : public IsotopesView
     Q_OBJECT
 
 public:
-    explicit IsotopesGraphView(int,QSqlQueryModel*,int,int,QWidget* = 0);
+    explicit IsotopesGraphView(int,QSqlQueryModel*,int,int,QWidget* = nullptr);
     void updateIsotopes(int=6);
     QString getGraphName() const;
     void exportGraph();

@@ -12,19 +12,6 @@ IsotopeAction::IsotopeAction(IsotopeAction::Kind kind,QString text,QObject* pare
 
 void IsotopeAction::actionSelect()
 {
-    QList<QAction*> actions=dynamic_cast<MainWindow*>(this->parent())->getIsotopeActions();
-    foreach (QAction* action,actions)
-    {
-        if(action!=this)
-        {
-            action->setEnabled(true);
-            action->setChecked(false);
-        }
-        else
-        {
-            action->setEnabled(false);
-            action->setChecked(true);
-        }
-    }
+    emit actionSelected(this);
     emit actionSelected(this->columnKind);
 }

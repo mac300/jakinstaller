@@ -13,21 +13,20 @@
 #include <QProgressBar>
 #include <iostream>
 
-class MainWidget;
-class IsotopeAction;
+using namespace std;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();    
     QSqlQueryModel* getDataModel();
-    QList<QAction*> getIsotopeActions() const;
 
 private slots:
     void showInfo();
+    void actionSelected(const IsotopeAction*);
 
 private:
     void setConnectionToDatabase();

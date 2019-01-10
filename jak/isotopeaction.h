@@ -1,11 +1,12 @@
 #ifndef ISOTOPEACTION_H
 #define ISOTOPEACTION_H
 
-#include "mainwindow.h"
 #include <QAction>
 #include <QString>
 #include <QList>
 #include <iostream>
+
+class MainWindow;
 
 class IsotopeAction : public QAction
 {
@@ -33,9 +34,10 @@ public:
         Q_NA=44
     };
 
-    explicit IsotopeAction(IsotopeAction::Kind,QString,QObject* = 0);
+    explicit IsotopeAction(IsotopeAction::Kind,QString,QObject* = nullptr);
 
 signals:
+    void actionSelected(const IsotopeAction*);
     void actionSelected(const int);
 
 private slots:
